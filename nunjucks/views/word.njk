@@ -1,0 +1,22 @@
+{% extends "templates/base.njk" %}
+
+{% block head %}
+    <title>{{ word }}</title>
+{% endblock %}
+
+{% block body %}
+    <h1>
+        {{ word | capitalize }}
+    </h1>
+    {% if wordLength % 2 == 0 %}
+        <p>Even</p>
+    {% else %}
+        <p>Odd</p>
+    {% endif %}
+
+    <p>{{ "Even" if wordLength % 2 == 0 else "Odd" }}</p>
+
+    {% for index, letter in word %}
+        <p>{{ index | int + 1 }}/{{ loop.length }}: {{ letter }}</p>
+    {% endfor %}
+{% endblock %}
