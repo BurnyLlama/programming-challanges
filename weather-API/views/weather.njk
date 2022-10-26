@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather{{ " in " if city }}{{ city }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Manrope', sans-serif;
+            font-size: 14pt;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100vw;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #DBF1A7;
+            opacity: 0.8;
+            background-image:  linear-gradient(30deg, #C2E571 12%, transparent 12.5%, transparent 87%, #C2E571 87.5%, #C2E571), linear-gradient(150deg, #C2E571 12%, transparent 12.5%, transparent 87%, #C2E571 87.5%, #C2E571), linear-gradient(30deg, #C2E571 12%, transparent 12.5%, transparent 87%, #C2E571 87.5%, #C2E571), linear-gradient(150deg, #C2E571 12%, transparent 12.5%, transparent 87%, #C2E571 87.5%, #C2E571), linear-gradient(60deg, #C2E57177 25%, transparent 25.5%, transparent 75%, #C2E57177 75%, #C2E57177), linear-gradient(60deg, #C2E57177 25%, transparent 25.5%, transparent 75%, #C2E57177 75%, #C2E57177);
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+        }
+
+        form, div {
+            color: #DBF1A7;
+            background-color: #00001fcc;
+            margin: 1rem 0;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form > label {
+            margin-top: 1rem;
+        }
+
+        form > input {
+            margin: .5rem 0 1rem 0;
+            padding: .5rem 1rem;
+            border: 0 none transparent;
+            border-radius: .5rem;
+        }
+
+        input[type="submit"] {
+            color: #00001f;
+            background-color: #C2E571;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form action="/" method="get">
+        <label for="city">City name:</label>
+        <input type="text" id="city" name="city" value="{{ city }}">
+        <input type="submit" value="Find me the weather!">
+    </form>
+    {% if city %}
+        <div>
+            <h1>Weather in {{ city }}:</h1>
+            <p>It is {{ temp }}°C and the weather is {{ description }}.</p>
+        </div>
+    {% endif %}
+</body>
+</html>
