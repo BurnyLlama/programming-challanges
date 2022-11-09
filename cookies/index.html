@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delcious cookies</title>
+</head>
+<body>
+    <!-- Create or change a cookie. -->
+    <form action="/set-cookie" method="post">
+        <h1>Set a cookie to a value</h1>
+        <p>This creates a new cookie if it doesn't exist, else updates and old cookie.</p>
+        <label for="cookie-name-set">Cookie name:</label>
+        <input type="text" name="cookieName" id="cookie-name-set">
+        <label for="cookie-value-set">Cookie value:</label>
+        <input type="text" name="cookieValue" id="cookie-value-set">
+        <input type="submit" value="Set cookie!">
+    </form>
+
+    <!-- View cookies server-side. -->
+    <form action="/view-cookies" method="post">
+        <h1>Show cookies server-side</h1>
+        <input type="submit" value="Show my cookies!">
+    </form>
+
+    <!-- Delete a cookie. -->
+    <form action="/delete-cookie" method="post">
+        <h1>Delete a cookie</h1>
+        <label for="cookie-name-delete">Cookie name:</label>
+        <input type="text" name="cookieName" id="cookie-name-delete">
+        <input type="submit" value="Delete cookie!">
+    </form>
+</body>
+</html>
