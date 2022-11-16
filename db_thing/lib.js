@@ -6,7 +6,7 @@ import { randomUUID } from "crypto"
 const DDIR = "./data"
 
 /**
- * @typedef CollectionItem
+ * @typedef {Object} CollectionItem
  * @property {UUID} id A UUID for the item.
  * @property {*} data Data for the item. Can be anything.
  * @property {Number} ctime The time the item was created. (UNIX epoch)
@@ -62,12 +62,31 @@ class Collection {
         return this.#localCollectionData.find(item => item.id === itemID)
     }
 
-    find(callback) {
-        return this.#localCollectionData.find(callback)
+    /**
+     * A filter that works like `Array.prototype.find` and `Array.prototype.filter`.
+     * @callback Filter
+     * @param {CollectionItem} item An item to filter against.
+     * @returns {boolean}
+     */
+
+    /**
+     * Returns the first item matching the filter.
+     * @param {Filter} filter The filter to be applied.
+     * @returns {CollectionItem}
+     */
+    findOne(filter) {
+        //                                     v--- This makes sure that the callback can't get access to index or the original array.
+        return this.#localCollectionData.find(item => filter(item))
     }
 
-    findAll(callback) {
-        return this.#localCollectionData.filter(callback)
+    /**
+     * Returns all items matching the filter.
+     * @param {Filter} filter The filter to be applied.
+     * @returns {Array<CollectionItem>}
+     */
+    findAll(filter) {
+        //                                     v--- This makes sure that the callback can't get access to index or the original array.
+        return this.#localCollectionData.filter(item => filter(item))
     }
 }
 
@@ -124,7 +143,8 @@ const col = await db.collection("lol").catch(err)
 
 // console.dir({ item, foundItem }, { depth: null })
 
+const item  = col.findOne(item => item.data === "hej")
 const items = col.findAll(item => item.data === "hej")
-console.dir(items, { depth: null })
+console.dir({ item, items }, { depth: null })
 
 // console.log(db.getLoadedCollections())
