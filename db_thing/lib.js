@@ -29,9 +29,6 @@ class Collection {
     constructor(name, collectionData) {
         this.#collectionLocation =`${DDIR}/${name}.json`
         this.#localCollectionData = collectionData
-
-        this.findOne = this.#localCollectionData.find
-        this.findAll = this.#localCollectionData.filter
     }
 
     /**
@@ -63,6 +60,14 @@ class Collection {
      */
     read(itemID) {
         return this.#localCollectionData.find(item => item.id === itemID)
+    }
+
+    find(callback) {
+        return this.#localCollectionData.find(callback)
+    }
+
+    findAll(callback) {
+        return this.#localCollectionData.filter(callback)
     }
 }
 
@@ -114,13 +119,12 @@ const err = err => console.error(err)
 const db = new Database()
 const col = await db.collection("lol").catch(err)
 
-const item = await col.write("hej").catch(err)
-const foundItem = col.read(item.id)
+// const item = await col.write("hej").catch(err)
+// const foundItem = col.read(item.id)
 
-console.dir({ item, foundItem }, { depth: null })
+// console.dir({ item, foundItem }, { depth: null })
 
 const items = col.findAll(item => item.data === "hej")
 console.dir(items, { depth: null })
 
-
-console.log(db.getLoadedCollections())
+// console.log(db.getLoadedCollections())
